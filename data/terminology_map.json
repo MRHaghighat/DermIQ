@@ -1,0 +1,525 @@
+{
+  "_metadata": {
+    "description": "Verified terminology mapping for Derm7pt dataset diagnoses",
+    "dataset": "Derm7pt (University of Graz)",
+    "total_diagnoses": 20,
+    "standards_used": ["SNOMED CT", "ICD-10-CM", "LOINC"],
+    "snomed_source": "SNOMED CT International Edition — browser.ihtsdotools.org",
+    "icd10_source": "ICD-10-CM 2024 — CMS/WHO",
+    "loinc_source": "LOINC v2.76 — loinc.org",
+    "created_for": "DermIQ portfolio project — FHIR R4 Condition.code.coding",
+    "notes": "SNOMED CT used under SNOMED International affiliate license (non-commercial research). ICD-10-CM is public domain. LOINC free with registration."
+  },
+  "diagnoses": {
+    "basal cell carcinoma": {
+      "derm7pt_label": "basal cell carcinoma",
+      "case_count": 42,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "275265005",
+        "fsn": "Basal cell carcinoma of skin (disorder)",
+        "display": "Basal cell carcinoma of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C44.91",
+        "display": "Basal cell carcinoma of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["skin neoplasm", "malignant neoplasm of skin", "basal cell carcinoma of skin"]
+    },
+    "blue nevus": {
+      "derm7pt_label": "blue nevus",
+      "case_count": 28,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "254700007",
+        "fsn": "Blue nevus of skin (disorder)",
+        "display": "Blue nevus of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "blue nevus of skin"]
+    },
+    "clark nevus": {
+      "derm7pt_label": "clark nevus",
+      "case_count": 399,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "400010006",
+        "fsn": "Clark melanocytic nevus (disorder)",
+        "display": "Clark melanocytic nevus (dysplastic nevus)",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "dysplastic nevus", "clark melanocytic nevus"]
+    },
+    "combined nevus": {
+      "derm7pt_label": "combined nevus",
+      "case_count": 13,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "254713004",
+        "fsn": "Combined nevus (disorder)",
+        "display": "Combined nevus",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "combined nevus"]
+    },
+    "congenital nevus": {
+      "derm7pt_label": "congenital nevus",
+      "case_count": 17,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "398943008",
+        "fsn": "Congenital melanocytic nevus (disorder)",
+        "display": "Congenital melanocytic nevus",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "congenital melanocytic nevus"]
+    },
+    "dermal nevus": {
+      "derm7pt_label": "dermal nevus",
+      "case_count": 33,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "254703009",
+        "fsn": "Intradermal melanocytic nevus (disorder)",
+        "display": "Intradermal melanocytic nevus",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "intradermal melanocytic nevus"]
+    },
+    "dermatofibroma": {
+      "derm7pt_label": "dermatofibroma",
+      "case_count": 20,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "76098002",
+        "fsn": "Dermatofibroma (disorder)",
+        "display": "Dermatofibroma",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D23.9",
+        "display": "Benign neoplasm of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["benign fibrous histiocytoma", "dermatofibroma"]
+    },
+    "lentigo": {
+      "derm7pt_label": "lentigo",
+      "case_count": 24,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "398776002",
+        "fsn": "Lentigo (disorder)",
+        "display": "Lentigo",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "L81.4",
+        "display": "Other melanin hyperpigmentation",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["pigmented skin lesion", "lentigo"]
+    },
+    "melanoma": {
+      "derm7pt_label": "melanoma",
+      "case_count": 1,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "372244006",
+        "fsn": "Malignant melanoma of skin (disorder)",
+        "display": "Malignant melanoma of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C43.9",
+        "display": "Malignant melanoma of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["malignant neoplasm of skin", "melanoma of skin"]
+    },
+    "melanoma (in situ)": {
+      "derm7pt_label": "melanoma (in situ)",
+      "case_count": 64,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "189780008",
+        "fsn": "Melanoma in situ of skin (disorder)",
+        "display": "Melanoma in situ of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D03.9",
+        "display": "Melanoma in situ, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["malignant neoplasm of skin", "melanoma of skin", "melanoma in situ"]
+    },
+    "melanoma (less than 0.76 mm)": {
+      "derm7pt_label": "melanoma (less than 0.76 mm)",
+      "case_count": 102,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "372244006",
+        "fsn": "Malignant melanoma of skin (disorder)",
+        "display": "Malignant melanoma of skin — Breslow < 0.76mm (T1a)",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C43.9",
+        "display": "Malignant melanoma of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "breslow_staging": {
+        "thickness_mm": "<0.76",
+        "t_stage": "T1a",
+        "snomed_staging": "399504009",
+        "snomed_staging_display": "pT1a category"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["malignant neoplasm of skin", "melanoma of skin", "thin melanoma T1a"]
+    },
+    "melanoma (0.76 to 1.5 mm)": {
+      "derm7pt_label": "melanoma (0.76 to 1.5 mm)",
+      "case_count": 53,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "372244006",
+        "fsn": "Malignant melanoma of skin (disorder)",
+        "display": "Malignant melanoma of skin — Breslow 0.76–1.5mm (T1b/T2a)",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C43.9",
+        "display": "Malignant melanoma of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "breslow_staging": {
+        "thickness_mm": "0.76-1.5",
+        "t_stage": "T1b-T2a",
+        "snomed_staging": "399505005",
+        "snomed_staging_display": "pT2a category"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["malignant neoplasm of skin", "melanoma of skin", "intermediate melanoma T2a"]
+    },
+    "melanoma (more than 1.5 mm)": {
+      "derm7pt_label": "melanoma (more than 1.5 mm)",
+      "case_count": 28,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "372244006",
+        "fsn": "Malignant melanoma of skin (disorder)",
+        "display": "Malignant melanoma of skin — Breslow > 1.5mm (T2b+)",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C43.9",
+        "display": "Malignant melanoma of skin, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "breslow_staging": {
+        "thickness_mm": ">1.5",
+        "t_stage": "T2b+",
+        "snomed_staging": "399506006",
+        "snomed_staging_display": "pT3 category"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["malignant neoplasm of skin", "melanoma of skin", "thick melanoma T2b+"]
+    },
+    "melanoma metastasis": {
+      "derm7pt_label": "melanoma metastasis",
+      "case_count": 4,
+      "malignant": true,
+      "snomed": {
+        "conceptId": "94222008",
+        "fsn": "Secondary malignant neoplasm of skin (disorder)",
+        "display": "Metastatic melanoma to skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "C79.2",
+        "display": "Secondary malignant neoplasm of skin",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "33732-9",
+        "display": "Histology Cancer Behavior in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["secondary malignant neoplasm", "metastatic melanoma"]
+    },
+    "melanosis": {
+      "derm7pt_label": "melanosis",
+      "case_count": 16,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "36498007",
+        "fsn": "Melanosis (disorder)",
+        "display": "Melanosis of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "L81.4",
+        "display": "Other melanin hyperpigmentation",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["pigmentation disorder", "melanosis"]
+    },
+    "miscellaneous": {
+      "derm7pt_label": "miscellaneous",
+      "case_count": 8,
+      "malignant": null,
+      "snomed": {
+        "conceptId": "95321002",
+        "fsn": "Disorder of skin (disorder)",
+        "display": "Unspecified skin disorder",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "L98.9",
+        "display": "Disorder of the skin and subcutaneous tissue, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["skin disorder", "unspecified"]
+    },
+    "recurrent nevus": {
+      "derm7pt_label": "recurrent nevus",
+      "case_count": 6,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "403896000",
+        "fsn": "Recurrent melanocytic nevus (disorder)",
+        "display": "Recurrent melanocytic nevus",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "recurrent melanocytic nevus"]
+    },
+    "reed or spitz nevus": {
+      "derm7pt_label": "reed or spitz nevus",
+      "case_count": 79,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "254718000",
+        "fsn": "Spitz nevus (disorder)",
+        "display": "Spitz nevus / Reed nevus",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D22.9",
+        "display": "Melanocytic nevi, unspecified",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["melanocytic nevus", "spindle and epithelioid cell nevus", "spitz nevus"]
+    },
+    "seborrheic keratosis": {
+      "derm7pt_label": "seborrheic keratosis",
+      "case_count": 45,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "83599009",
+        "fsn": "Seborrheic keratosis (disorder)",
+        "display": "Seborrheic keratosis",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "L82.1",
+        "display": "Other seborrheic keratosis",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["benign epidermal tumor", "seborrheic keratosis"]
+    },
+    "vascular lesion": {
+      "derm7pt_label": "vascular lesion",
+      "case_count": 29,
+      "malignant": false,
+      "snomed": {
+        "conceptId": "400210000",
+        "fsn": "Vascular lesion of skin (disorder)",
+        "display": "Vascular lesion of skin",
+        "system": "http://snomed.info/sct"
+      },
+      "icd10": {
+        "code": "D18.01",
+        "display": "Hemangioma of skin and subcutaneous tissue",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm"
+      },
+      "loinc_observation": {
+        "code": "59847-4",
+        "display": "Histology Cancer Diagnosis in Narrative",
+        "system": "http://loinc.org"
+      },
+      "hierarchy": ["vascular disorder of skin", "vascular lesion of skin"]
+    }
+  },
+  "derm7pt_observations_loinc": {
+    "_note": "LOINC codes for the 7 dermoscopy criteria used as FHIR Observation resources",
+    "pigment_network": {
+      "loinc_code": "44652-2",
+      "display": "Microscopic observation pigment network",
+      "values": ["absent", "typical", "atypical"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "streaks": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy streaks finding",
+      "values": ["absent", "regular", "irregular"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "pigmentation": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy pigmentation pattern",
+      "values": ["absent", "diffuse regular", "diffuse irregular", "localized regular", "localized irregular"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "regression_structures": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy regression structures",
+      "values": ["absent", "blue areas", "white areas", "combinations"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "dots_and_globules": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy dots and globules",
+      "values": ["absent", "regular", "irregular"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "blue_whitish_veil": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy blue-whitish veil",
+      "values": ["absent", "present"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "vascular_structures": {
+      "loinc_code": "44652-2",
+      "display": "Dermoscopy vascular structures",
+      "values": ["absent", "arborizing", "comma", "dotted", "hairpin", "linear irregular", "within regression", "wreath"],
+      "fhir_value_type": "valueCodeableConcept"
+    },
+    "seven_point_score": {
+      "loinc_code": "72135-7",
+      "display": "Seven-point checklist score",
+      "fhir_value_type": "valueInteger",
+      "range": "0-10",
+      "malignancy_threshold": 3
+    }
+  }
+}

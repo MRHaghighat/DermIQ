@@ -1,0 +1,14 @@
+# Dataset (large files)
+data/derm7pt/images/
+data/derm7pt/*.jpg
+data/derm7pt/*.JPG
+data/derm7pt/*.png
+
+# Environment
+.env
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+
+# Docker volumes
+docker/hapi-data/
