@@ -1,9 +1,3 @@
-"""
-pages/1_patient_card.py
-────────────────────────
-Load a Derm7pt case → build FHIR resources → push to HAPI → display.
-"""
-
 import streamlit as st
 import pandas as pd
 import json
@@ -17,7 +11,7 @@ st.set_page_config(page_title="Patient Card — DermIQ", layout="wide")
 st.title("Patient Card")
 st.caption("Load a Derm7pt case, encode it as FHIR R4, and push to HAPI server.")
 
-# ── Load data ─────────────────────────────────────────────────────────────────
+# Load data
 @st.cache_data
 def load_meta() -> pd.DataFrame:
     return pd.read_csv(DERM7PT_META_PATH)
@@ -38,7 +32,7 @@ except Exception as e:
     st.error(f"Initialization error: {e}")
     st.stop()
 
-# ── Case selector ─────────────────────────────────────────────────────────────
+# Case selector
 st.subheader("Select Case")
 col1, col2 = st.columns([1, 2])
 
@@ -61,8 +55,7 @@ with col2:
 
 st.divider()
 
-# ── Images ────────────────────────────────────────────────────────────────────
-# ساختار واقعی Derm7pt: images/NEL/NEL025.JPG (clinic و derm پیش هم بدون تفکیک)
+# Images
 img_col1, img_col2 = st.columns(2)
 with img_col1:
     clinic_path = row.get("clinic", "")
@@ -83,7 +76,7 @@ with img_col2:
 
 st.divider()
 
-# ── Display case details ──────────────────────────────────────────────────────
+# Display case details
 st.subheader("Clinical Data")
 col_a, col_b, col_c = st.columns(3)
 
@@ -115,7 +108,7 @@ with col_c:
 
 st.divider()
 
-# ── Build & Push to FHIR ─────────────────────────────────────────────────────
+# Build & Push to FHIR
 st.subheader("FHIR R4 Resources")
 
 if st.button("Build & Push to HAPI FHIR Server", type="primary"):
@@ -127,15 +120,12 @@ if st.button("Build & Push to HAPI FHIR Server", type="primary"):
     if client.ping():
         with st.spinner("Pushing to HAPI..."):
             try:
-                # مرحله ۱: Patient رو push کن و ID واقعی از HAPI بگیر
                 patient_id = client.create("Patient", resources["patient"])
 
-                # مرحله ۲: subject reference رو با ID واقعی HAPI آپدیت کن
                 resources["condition"]["subject"]["reference"] = f"Patient/{patient_id}"
                 for obs in resources["observations"]:
                     obs["subject"]["reference"] = f"Patient/{patient_id}"
 
-                # مرحله ۳: حالا Condition و Observations رو push کن
                 condition_id = client.create("Condition", resources["condition"])
                 obs_ids = [client.create("Observation", obs) for obs in resources["observations"]]
 
@@ -154,7 +144,7 @@ if st.button("Build & Push to HAPI FHIR Server", type="primary"):
         st.warning("HAPI server offline — showing resources locally only.")
         st.session_state["last_resources"] = resources
 
-# ── Show built JSON ───────────────────────────────────────────────────────────
+# Show built JSON
 if "last_resources" in st.session_state:
     with st.expander("View built FHIR JSON"):
         tab1, tab2, tab3 = st.tabs(["Patient", "Condition", "Observations"])
