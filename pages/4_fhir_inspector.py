@@ -1,10 +1,3 @@
-"""
-pages/4_fhir_inspector.py
-──────────────────────────
-Query the live HAPI FHIR server and inspect raw FHIR R4 JSON.
-The "show the recruiter" page.
-"""
-
 import streamlit as st
 from core.fhir.client import FHIRClient, FHIRError
 
@@ -18,7 +11,7 @@ def get_client():
 
 client = get_client()
 
-# ── Server status ─────────────────────────────────────────────────────────────
+# Server status
 if client.ping():
     st.success("HAPI FHIR Server — Connected (http://localhost:8080/fhir)")
 else:
@@ -27,7 +20,7 @@ else:
 
 st.divider()
 
-# ── Resource browser ──────────────────────────────────────────────────────────
+# Resource browser
 st.subheader("Browse Resources")
 col1, col2 = st.columns([1, 2])
 
@@ -59,7 +52,7 @@ if st.button("Fetch", type="primary"):
 
 st.divider()
 
-# ── Use last pushed patient ───────────────────────────────────────────────────
+# Use last pushed patient
 if "last_patient_id" in st.session_state:
     pid = st.session_state["last_patient_id"]
     st.subheader(f"Last pushed: Patient/{pid}")
@@ -83,7 +76,7 @@ if "last_patient_id" in st.session_state:
         except FHIRError as e:
             st.error(str(e))
 
-# ── Raw query ─────────────────────────────────────────────────────────────────
+# Raw query
 st.divider()
 st.subheader("Custom Search Parameters")
 raw_params = st.text_input(
