@@ -1,14 +1,3 @@
-"""
-core/ontology/mapper.py
-───────────────────────
-Loads terminology_map.json and maps Derm7pt diagnosis labels
-to SNOMED CT, ICD-10-CM, and LOINC codes.
-
-Pydantic is used here for: validating each entry in the JSON on load,
-so a corrupted terminology_map.json fails loudly at startup,
-not silently mid-request.
-"""
-
 from __future__ import annotations
 
 import json
@@ -22,27 +11,22 @@ from config import TERMINOLOGY_MAP_PATH
 
 logger = logging.getLogger(__name__)
 
-
-# ── Pydantic models for terminology entries ───────────────────────────────────
-
+# Pydantic models for terminology entries
 class SnomedEntry(BaseModel):
     conceptId: str
     fsn: str
     display: str
     system: str
 
-
 class Icd10Entry(BaseModel):
     code: str
     display: str
     system: str
 
-
 class LoincEntry(BaseModel):
     code: str
     display: str
     system: str
-
 
 class DiagnosisEntry(BaseModel):
     derm7pt_label: str
@@ -53,22 +37,8 @@ class DiagnosisEntry(BaseModel):
     loinc_observation: LoincEntry
     hierarchy: list[str]
 
-
-# ── Mapper ────────────────────────────────────────────────────────────────────
-
+# Mapper
 class TerminologyMapper:
-    """
-    Singleton-style mapper. Loads once, serves many lookups.
-
-    Usage:
-        mapper = TerminologyMapper()
-        entry  = mapper.get("melanoma")
-        # entry is a dict with keys: snomed, icd10, loinc_observation, ...
-
-        snomed_id = mapper.snomed_id("melanoma")   # "372244006"
-        icd10     = mapper.icd10_code("melanoma")  # "C43.9"
-    """
-
     _FALLBACK_LABEL = "miscellaneous"
 
     def __init__(self, path: Path = TERMINOLOGY_MAP_PATH):
@@ -91,10 +61,6 @@ class TerminologyMapper:
         logger.info("Loaded %d terminology entries", len(self._entries))
 
     def get(self, label: str) -> dict:
-        """
-        Return the full entry dict for a diagnosis label.
-        Falls back to 'miscellaneous' if label not found.
-        """
         entry = self._entries.get(label) or self._entries.get(self._FALLBACK_LABEL)
         if entry is None:
             raise KeyError(f"Label '{label}' not found and no fallback available.")
