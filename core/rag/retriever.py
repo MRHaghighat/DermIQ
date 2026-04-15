@@ -1,16 +1,3 @@
-"""
-core/rag/retriever.py
-─────────────────────
-Full RAG pipeline:
-  1. fetch_abstracts()     →  PubMed raw text
-  2. embed_texts()         →  vector corpus
-  3. embed query           →  query vector
-  4. top_k_indices()       →  most relevant abstracts
-  5. Ollama llama3.2       →  clinical summary + treatment suggestion
-
-All generation happens locally via Ollama — no external API calls.
-"""
-
 from __future__ import annotations
 
 import logging
@@ -26,7 +13,6 @@ GENERATE_URL = f"{OLLAMA_BASE_URL}/api/generate"
 
 
 def _generate(prompt: str, system: str) -> str:
-    """Call Ollama /api/generate and return the response text."""
     payload = {
         "model": OLLAMA_LLM_MODEL,
         "prompt": prompt,
@@ -47,7 +33,6 @@ def _generate(prompt: str, system: str) -> str:
 
 
 def _build_context(abstracts: list[dict], top_indices: list[int]) -> str:
-    """Build context string from top-k abstracts."""
     parts = []
     for rank, idx in enumerate(top_indices, 1):
         a = abstracts[idx]
@@ -60,31 +45,18 @@ def _build_context(abstracts: list[dict], top_indices: list[int]) -> str:
 
 
 def run_rag(
-    diagnosis: str,
-    snomed_display: str,
-    clinical_question: str | None = None,
+    diagnosis: str, #Derm7pt label
+    snomed_display: str, #SNOMED FSN display name
+    clinical_question: str | None = None, # Optional specific question (default: treatment)
 ) -> dict:
-    """
-    Full RAG pipeline for a given diagnosis.
 
-    Args:
-        diagnosis:         Derm7pt label
-        snomed_display:    SNOMED FSN display name
-        clinical_question: Optional specific question (default: treatment)
-
-    Returns dict with keys:
-        summary        : LLM-generated clinical summary
-        sources        : list of cited abstracts (pmid, title, url, year)
-        abstracts_used : number of abstracts retrieved
-        query_used     : PubMed query that was executed
-    """
     if clinical_question is None:
         clinical_question = (
             f"What are the current evidence-based treatment options "
             f"and management guidelines for {snomed_display}?"
         )
 
-    # ── Step 1: Fetch PubMed abstracts ────────────────────────────────────────
+    # PubMed abstracts
     logger.info("RAG: fetching PubMed abstracts for '%s'", diagnosis)
     abstracts = fetch_abstracts(diagnosis, snomed_display)
 
@@ -97,19 +69,19 @@ def run_rag(
             "query_used": diagnosis,
         }
 
-    # ── Step 2: Embed corpus + query ──────────────────────────────────────────
+    #  Embed corpus + query
     logger.info("RAG: embedding %d abstracts", len(abstracts))
     corpus_texts = [a["text"] for a in abstracts]
     corpus_vecs  = embed_texts(corpus_texts)
 
     query_vec = embed_texts([clinical_question])[0]
 
-    # ── Step 3: Retrieve top-k ────────────────────────────────────────────────
+    # Retrieve top-k
     k = min(RAG_TOP_K, len(abstracts))
     top_idx = top_k_indices(query_vec, corpus_vecs, k)
     context = _build_context(abstracts, top_idx)
 
-    # ── Step 4: Generate clinical summary ─────────────────────────────────────
+    # clinical summary
     system_prompt = (
         "You are a clinical dermatology assistant. "
         "Your role is to summarize medical evidence and suggest treatment approaches "
@@ -133,7 +105,7 @@ def run_rag(
     logger.info("RAG: generating summary with %s", OLLAMA_LLM_MODEL)
     summary = _generate(user_prompt, system_prompt)
 
-    # ── Step 5: Collect cited sources ─────────────────────────────────────────
+    # Collect cited sources
     sources = [
         {
             "pmid": abstracts[i]["pmid"],
