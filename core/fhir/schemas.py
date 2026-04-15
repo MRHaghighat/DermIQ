@@ -1,24 +1,9 @@
-"""
-core/fhir/schemas.py
-────────────────────
-Pydantic v2 models that mirror the FHIR R4 resources we use.
-
-WHY Pydantic here:
-  - Validates data BEFORE sending to HAPI (fail fast, clear error messages)
-  - Gives us typed objects throughout the codebase (IDE autocomplete)
-  - .model_dump(exclude_none=True) produces clean JSON — no null fields
-
-These are intentionally minimal subsets of full FHIR R4 schemas,
-containing only the fields DermIQ actually populates.
-"""
-
 from __future__ import annotations
 from typing import Literal
 from pydantic import BaseModel, Field
 
 
 # ── Shared building blocks ────────────────────────────────────────────────────
-
 class Coding(BaseModel):
     system: str
     code: str
