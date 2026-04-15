@@ -1,4 +1,4 @@
-# DermIQ — Dermatology Clinical Decision Support
+# DermIQ : Dermatology Clinical Decision Support
 
 > FHIR R4 · SNOMED CT · ICD-10 · LOINC · RAG · Ollama
 
