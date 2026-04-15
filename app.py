@@ -1,8 +1,3 @@
-"""
-app.py — DermIQ Streamlit entry point
-Run: streamlit run app.py
-"""
-
 import streamlit as st
 from config import APP_TITLE, APP_SUBTITLE, APP_VERSION
 from core.fhir.client import FHIRClient
@@ -14,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+# Sidebar
 with st.sidebar:
     st.title(APP_TITLE)
     st.caption(APP_SUBTITLE)
@@ -30,7 +25,7 @@ with st.sidebar:
     )
     st.caption(f"v{APP_VERSION}")
 
-# ── Home page ─────────────────────────────────────────────────────────────────
+# Home page
 st.title(f"{APP_TITLE} — Clinical Decision Support")
 st.markdown(f"*{APP_SUBTITLE}*")
 st.divider()
