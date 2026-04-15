@@ -1,9 +1,3 @@
-"""
-pages/3_clinical_reasoning.py
-──────────────────────────────
-RAG-powered clinical reasoning: PubMed + Ollama llama3.2.
-"""
-
 import streamlit as st
 from core.ontology.mapper import TerminologyMapper
 from core.rag.retriever import run_rag
@@ -18,7 +12,7 @@ def get_mapper():
 
 mapper = get_mapper()
 
-# ── Input ─────────────────────────────────────────────────────────────────────
+# Input
 st.subheader("Select Diagnosis")
 col1, col2 = st.columns([1, 2])
 
@@ -40,15 +34,14 @@ with col2:
 
 st.divider()
 
-# ── Clinical question ─────────────────────────────────────────────────────────
+# Clinical question
 custom_q = st.text_area(
     "Clinical question (optional — leave blank for default treatment query)",
     placeholder=f"e.g. What are first-line treatments for {snomed_display} in elderly patients?",
     height=80,
 )
 
-# ── Run RAG ───────────────────────────────────────────────────────────────────
-if st.button("Generate Clinical Summary", type="primary"):
+# Run RAG
     question = custom_q.strip() or None
 
     with st.spinner("Fetching PubMed abstracts..."):
@@ -65,7 +58,7 @@ if st.button("Generate Clinical Summary", type="primary"):
 
     st.markdown(result["summary"])
 
-    # ── Sources ───────────────────────────────────────────────────────────────
+    # Sources
     st.divider()
     st.subheader("Sources")
     for i, src in enumerate(result["sources"], 1):
@@ -74,7 +67,7 @@ if st.button("Generate Clinical Summary", type="primary"):
             st.write(f"**URL:** {src['url']}")
             st.markdown(f"[Open in PubMed]({src['url']})")
 
-    # ── Disclaimer ────────────────────────────────────────────────────────────
+    # Disclaimer
     st.divider()
     st.warning(
         "This output is for research and portfolio demonstration purposes only. "
