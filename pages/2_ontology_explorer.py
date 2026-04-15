@@ -1,9 +1,3 @@
-"""
-pages/2_ontology_explorer.py
-─────────────────────────────
-Interactive SNOMED hierarchy graph using networkx + Plotly.
-"""
-
 import streamlit as st
 import networkx as nx
 import plotly.graph_objects as go
@@ -22,7 +16,7 @@ def get_graph():
 
 G, mapper = get_graph()
 
-# ── Sidebar controls ──────────────────────────────────────────────────────────
+# Sidebar controls
 with st.sidebar:
     st.subheader("Filter")
     selected = st.selectbox(
@@ -33,7 +27,7 @@ with st.sidebar:
 
 st.divider()
 
-# ── Stats ─────────────────────────────────────────────────────────────────────
+# Stats
 col1, col2, col3 = st.columns(3)
 col1.metric("Total nodes", G.number_of_nodes())
 col2.metric("IS-A edges", G.number_of_edges())
@@ -41,7 +35,7 @@ col3.metric("Malignant leaves", len(malignant_leaves(G)))
 
 st.divider()
 
-# ── Build Plotly graph ────────────────────────────────────────────────────────
+# Build Plotly graph
 def build_plotly_figure(G: nx.DiGraph, highlight: str | None = None) -> go.Figure:
     pos = nx.spring_layout(G, seed=42, k=2.5)
 
@@ -141,7 +135,7 @@ def build_plotly_figure(G: nx.DiGraph, highlight: str | None = None) -> go.Figur
 fig = build_plotly_figure(G, selected if selected != "(none)" else None)
 st.plotly_chart(fig, use_container_width=True)
 
-# ── Detail panel ──────────────────────────────────────────────────────────────
+# Detail panel
 if selected != "(none)":
     st.divider()
     st.subheader(f"Details: {selected}")
