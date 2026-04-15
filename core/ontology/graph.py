@@ -1,17 +1,3 @@
-"""
-core/ontology/graph.py
-──────────────────────
-Builds a directed acyclic graph (DAG) of skin disease hierarchy
-from the terminology_map.json hierarchy fields.
-
-Nodes  = disease concepts (SNOMED labels)
-Edges  = IS-A relationships (child → parent)
-
-Used in:
-  pages/2_ontology_explorer.py  →  interactive Plotly graph
-  core/rag/retriever.py         →  finding related diagnoses for RAG expansion
-"""
-
 from __future__ import annotations
 
 import logging
@@ -24,21 +10,8 @@ logger = logging.getLogger(__name__)
 # Root node — all skin diseases connect here
 _ROOT = "skin disorder"
 
-
+# --- BUILD BY AI -----
 def build_graph(mapper: TerminologyMapper | None = None) -> nx.DiGraph:
-    """
-    Build and return a DiGraph of the dermatology ontology.
-
-    Node attributes:
-        label       : display name
-        snomed_id   : SNOMED conceptId
-        icd10       : ICD-10-CM code
-        malignant   : bool | None
-        is_leaf     : True for Derm7pt diagnosis nodes
-        case_count  : number of Derm7pt cases (leaves only)
-
-    Edge direction: child → parent  (IS-A direction)
-    """
     if mapper is None:
         mapper = TerminologyMapper()
 
