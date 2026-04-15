@@ -1,17 +1,3 @@
-"""
-core/rag/pubmed.py
-──────────────────
-Fetches PubMed abstracts for a given dermatology diagnosis.
-Uses NCBI E-utilities (free, no API key required — email recommended).
-
-Flow:
-  diagnosis label
-      ↓  build search query using SNOMED display name
-      ↓  esearch  →  list of PMIDs
-      ↓  efetch   →  abstract texts
-      ↓  list[dict]  →  embedder.py
-"""
-
 from __future__ import annotations
 
 import logging
@@ -27,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 def _build_query(diagnosis: str, snomed_display: str) -> str:
-    """Build a PubMed query string focused on dermatology treatment."""
     terms = [
         f'"{snomed_display}"[Title/Abstract]',
         '"dermoscopy"[Title/Abstract]',
@@ -39,7 +24,6 @@ def _build_query(diagnosis: str, snomed_display: str) -> str:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(min=2, max=10))
 def _esearch(query: str, max_results: int) -> list[str]:
-    """Run esearch and return list of PMIDs."""
     params = {
         "db": "pubmed",
         "term": query,
@@ -57,7 +41,6 @@ def _esearch(query: str, max_results: int) -> list[str]:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(min=2, max=10))
 def _efetch(pmids: list[str]) -> list[dict]:
-    """Fetch abstract text for a list of PMIDs."""
     if not pmids:
         return []
 
@@ -106,19 +89,9 @@ def _efetch(pmids: list[str]) -> list[dict]:
 def fetch_abstracts(
     diagnosis: str,
     snomed_display: str,
-    max_results: int = PUBMED_MAX_RESULTS,
+    max_results: int = PUBMED_MAX_RESULTS, # How many abstracts to fetch
 ) -> list[dict]:
-    """
-    Public entry point. Fetch PubMed abstracts for a diagnosis.
 
-    Args:
-        diagnosis:      Derm7pt label  (e.g. "melanoma (in situ)")
-        snomed_display: SNOMED display (e.g. "Melanoma in situ of skin")
-        max_results:    How many abstracts to fetch
-
-    Returns:
-        List of dicts with keys: pmid, title, abstract, year, url, text
-    """
     query = _build_query(diagnosis, snomed_display)
     pmids = _esearch(query, max_results)
     if not pmids:
